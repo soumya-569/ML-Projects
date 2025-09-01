@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Predict Page{% endblock %}
+
+{% block content %}
+
+    <div class="form-container">
+
+        <h2>Electricity Cost Predictor !</h2>
+        <form method="POST" action="/predict">
+            {{ form.hidden_tag() }}
+            
+            <p>
+                {{form.site_area.label}}<br>
+                {{form.site_area(class="input-field")}}<br>
+                {% for error in form.site_area.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.structure_type.label}}<br>
+                {{form.structure_type(class="input-field")}}<br>
+                {% for error in form.structure_type.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.water_consumption.label}}<br>
+                {{form.water_consumption(class="input-field")}}<br>
+                {% for error in form.water_consumption.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.recycle_rate.label}}<br>
+                {{form.recycle_rate(class="input-field")}}<br>
+                {% for error in form.recycle_rate.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.utilization_rate.label}}<br>
+                {{form.utilization_rate(class="input-field")}}<br>
+                {% for error in form.utilization_rate.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.aqi.label}}<br>
+                {{form.aqi(class="input-field")}}<br>
+                {% for error in form.aqi.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.issue_resolution_time.label}}<br>
+                {{form.issue_resolution_time(class="input-field")}}<br>
+                {% for error in form.issue_resolution_time.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.resident_count.label}}<br>
+                {{form.resident_count(class="input-field")}}<br>
+                {% for error in form.resident_count.errors %}
+                    <p style="color: red;">{{error}}</p>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{form.submit(class="btn")}}
+            </p>
+            
+        </form>
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        {% block title %}My Site{% endblock %}
+        <link rel="stylesheet" href="{{ url_for('static',filename='base.css') }}">
+        <style>
+            body{
+                background-color: bisque;
+            }
+            header{
+                background-color: grey;
+                color: white;
+                padding: 20px;
+            }
+            footer{
+                background-color: grey;
+                color: white;
+                padding: 10px;
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h2>Welcome To The <em><b>Electricity Cost</b></em> Prediction App</h2>
+            <nav>
+                <a href="/">Home</a>
+                <a href="/predict">Prediction</a>
+                <a href="/model_info">Model Info</a>
+                <a href="/visualization">Visualization</a>
+                <a href="/about">About</a>
+            </nav>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category,msg in messages %}
+                <p style="background-color: green;color: white;padding: 10px; text-align: center;margin-left: 220px; margin-right: 220px;border-radius: 12px;">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}
+
+        {% endblock %}
+
+        <footer>
+            <p>copyright &copy; by Soumyadip Panigrahi</p>
+        </footer>
+    </body>
+</html>
