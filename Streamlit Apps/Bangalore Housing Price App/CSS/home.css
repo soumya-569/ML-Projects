@@ -43,6 +43,10 @@ a[data-testid='stSidebarNavLink']{
     padding: 5px 15px;
 }
 
+a[data-testid='stSidebarNavLink']:hover{
+    background-color: var(--accent_hover);
+}
+
 .nav_cont{
     text-decoration: none;
     padding: 20px 50px;
