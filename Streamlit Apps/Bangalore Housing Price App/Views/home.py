@@ -1,9 +1,19 @@
 import streamlit as st
 from streamlit_lottie import st_lottie   # ? Welcome animation for home page
+from streamlit_extras.stylable_container import stylable_container
 import pandas as pd  # ? For Analysis
 import json
 import time
 
+st.markdown(
+    '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">',
+    unsafe_allow_html=True
+)
+
+css_path = r"F:\Udemy\Git\ML Portfolio\Streamlit Apps\Bangalore Housing Price App\CSS\home.css"
+with open(css_path) as load_css:
+    st.markdown(f"<style>{load_css.read()}</style>",unsafe_allow_html=True)
+    
 # ** Import data and convert it into dataframe by PANDAS
 
 # @st.cache_data()  # ? Cache for 1 hour
@@ -39,13 +49,31 @@ with col1:
 with col2:
     st.subheader('🏠 Welcome to `Bangalore` house price prediction app')
     st.text("📊 This interactive machine learning app helps you analyze and predict property prices across Bangalore using real data. You can explore data patterns, visualize area-wise insights, and predict house prices based on features like location, BHK, and square footage — helping buyers and investors make smarter decisions.")
-    rating = st.feedback(options="stars")
-    if not rating:
-        st.info("Please leave us a rating from your experience")
-    elif rating <= 2 :
-        st.success("Thank your for your feedback, we will improve ourselves")
+    rating = st.feedback(options="stars",)
+    if rating :
+        st.session_state.setdefault('show_form',True)
+        if st.session_state.show_form:
+            with st.form(key='feedback'):
+                name = st.text_input(label="Full Name",placeholder="Enter your full name",icon=":material/id_card:")
+                email = st.text_input(label="Mail",placeholder="Enter your email",icon=":material/mail:")
+                submit = st.form_submit_button(label="Send Feedback")
+                if submit:
+                    if "@" not in email or "." not in email:
+                        st.error("Email is not valid")
+                    elif not name:
+                        st.error("Name can't be empty")
+                    else:
+                        st.session_state['rating'] = rating
+                        st.session_state['name'] = name
+                        st.session_state['email'] = email
+                        if rating <= 2:
+                            st.success("Thank you for your feedback, we will improve ourselves")
+                        else:
+                            st.success("Thank you for your feedback, we glad you have enjoyed")
+                        st.session_state['show_form'] = False
+                        st.rerun()
     else:
-        st.success("Thank you for your feedback, we are glad to see you have enjoyed")
+        st.info("Please leave us a rating from your experience")
 
 # ** Dataset Info & Preview
 
@@ -70,16 +98,13 @@ Data Source: [Kaggle - Bangalore House Prices](https://www.kaggle.com/datasets/a
 col_btn_1,col_btn_2,col_btn_3 = st.columns(3,gap="small")
 
 with col_btn_1:
-    with st.container():
-        st.page_link("Views/analysis.py",label="See Quick Info",icon=":material/bar_chart:")
+    st.html("<a class='nav_cont' href='http://localhost:8501/analysis'><i class='fa fa-bar-chart'></i> See Analysis</a>")
 
 with col_btn_2:
-    with st.container():
-        st.page_link("Views/model.py",label="See Prediction",icon=":material/robot_2:")
+    st.html("<a class='nav_cont' href='http://localhost:8501/model'><i class='fas fa-robot'></i>  See Prediction</a>")
 
 with col_btn_3:
-    with st.container():
-        st.page_link("Views/conclusion.py",label="See Conclusion",icon=":material/gavel:")
+    st.html("<a class='nav_cont' href='http://localhost:8501/conclusion'><i class='fas fa-gavel'></i> See Conclusion</a>")
 
 
 
