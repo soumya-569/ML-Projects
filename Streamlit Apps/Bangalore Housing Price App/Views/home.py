@@ -4,6 +4,7 @@ from streamlit_extras.stylable_container import stylable_container
 import pandas as pd  # ? For Analysis
 import json
 import time
+st.set_page_config(layout="centered")
 
 st.markdown(
     '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">',
