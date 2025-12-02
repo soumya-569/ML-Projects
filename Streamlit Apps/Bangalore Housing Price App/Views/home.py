@@ -50,7 +50,7 @@ with col1:
 with col2:
     st.subheader('🏠 Welcome to `Bangalore` house price prediction app')
     st.text("📊 This interactive machine learning app helps you analyze and predict property prices across Bangalore using real data. You can explore data patterns, visualize area-wise insights, and predict house prices based on features like location, BHK, and square footage — helping buyers and investors make smarter decisions.")
-    rating = st.feedback(options="stars",)
+    rating = st.feedback(options="stars")
     if rating :
         st.session_state.setdefault('show_form',True)
         if st.session_state.show_form:
