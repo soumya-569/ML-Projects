@@ -1,6 +1,6 @@
 import streamlit as st
 from analytics import location,location_chart,average_price,avg_price_sqft,total_properties
-from charts import expensive_location
+from charts import expensive_location,area_type_ratio
 
 st.set_page_config(layout="wide")
 
@@ -27,7 +27,12 @@ with kpi3:
 with kpi4:
     st.metric("Average Price/sqft",call_kpi4())
 
+st.divider()
+
 chart1,chart2,chart3 = st.columns(3,gap="small")
 
 with chart1:
     st.plotly_chart(expensive_location())
+
+with chart2:
+    st.plotly_chart(area_type_ratio())

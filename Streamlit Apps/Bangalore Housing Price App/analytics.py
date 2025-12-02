@@ -27,7 +27,4 @@ def avg_price_sqft():
 def total_properties():
     return df['area_type'].count()
 
-def expensive_location():
-    exp_loc =  df.groupby("location",observed=False)[["location"]].count().rename(columns={"location":"total"}).reset_index().sort_values("total",ascending=False)
-    fig = px.bar(data_frame=exp_loc,x="location",y="total")
-    return fig.show()
+

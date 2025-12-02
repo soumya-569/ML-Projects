@@ -14,8 +14,19 @@ def expensive_location():
     fig.update_layout(
         title={
             'text': "Top 10 Most Properties In a Location",
-            'x': 0.5, # Center the title
-            'xanchor': 'center'
-        }
+            'x': 0.5,
+            'y':0.95,
+            'xanchor': 'center',
+            'yanchor':'top'
+        },
+        yaxis_title_text = "Total Properties",
+        xaxis_title_text = "Location"
     )
+    return fig
+
+def area_type_ratio():
+    fig = go.Figure(
+    go.Pie(labels=df["area_type"],hole=0.6)
+    )
+    fig.update_layout(legend={"x":0.5,"y":-0.2,"xanchor":"center","yanchor":"bottom","orientation":"h"},title={"text":"Area Type Distribution","x":0.5,"y":0.95,"xanchor":"center","yanchor":"top"})
     return fig
