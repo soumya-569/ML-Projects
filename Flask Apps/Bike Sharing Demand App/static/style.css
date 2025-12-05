@@ -1,0 +1,57 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: #003b5c;
+    padding: 15px 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-left .logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f37021;
+}
+
+.nav-right a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.nav-right a:hover {
+    text-decoration: underline;
+}
+
+/* MAIN PAGE CONTENT */
+.container {
+    width: 80%;
+    margin: 30px auto;
+}
+
+/* CARD BOX */
+.card {
+    background: white;
+    padding: 20px;
+    margin-top: 25px;
+    border-left: 5px solid #f37021;
+    border-radius: 5px;
+}
+
+/* PREDICTION OUTPUT BOX */
+.prediction-box {
+    margin-top: 15px;
+    background: #003b5c;
+    color: white;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 18px;
+}

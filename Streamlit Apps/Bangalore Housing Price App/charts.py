@@ -44,7 +44,7 @@ def price_distribution():
     return fig
 
 def price_per_sqft_distribution():
-    fig = px.violin(df,x="price_per_sqft",color_discrete_sequence=['#00FFFF'])
+    fig = px.violin(df.loc[df['price_per_sqft'] < df['price_per_sqft'].quantile(0.99)],y="price_per_sqft",color_discrete_sequence=['#00FFFF'])
     fig.update_layout(
         xaxis=dict(showgrid=False,title="Price Per SQFT"),
         yaxis=dict(showgrid=False),
@@ -88,7 +88,7 @@ def avg_price_bhk():
     return fig
 
 def pps_bhk():
-    fig = px.box(df.loc[df['bhk'] <= 10],x="bhk",y="price_per_sqft",color_discrete_sequence=['#00FFFF'],points=False)
+    fig = px.box(df.loc[(df['bhk'] <= 10)&(df["price_per_sqft"]<=2000)],x="bhk",y="price_per_sqft",color_discrete_sequence=['#00FFFF'],points=False)
     fig.update_layout(
         xaxis=dict(showgrid=False,title='BHK'),
         yaxis=dict(showgrid=False,title='Price Per SQFT'),

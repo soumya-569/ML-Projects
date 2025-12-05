@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Data Analysis Dashboard</h2>
+
+<p>
+    Here you will find the key customer analytics extracted from the ICICI Bank
+    churn dataset. Visual insights will appear below.
+</p>
+
+<div class="card">
+    <h3>Dataset Summary</h3>
+    <p>Total Customers: {{ total_customers }}</p>
+    <p>Churn Rate: {{ churn_rate }} %</p>
+</div>
+
+<div class="card">
+    <h3>Visual Analysis</h3>
+    <!-- Insert charts rendered using matplotlib/plotly -->
+    {{ analysis_plots | safe }}
+</div>
+
+{% endblock %}

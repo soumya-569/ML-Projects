@@ -38,6 +38,7 @@ gen1,gen2,gen3 = st.columns(3,gap="small")
 
 with gen1:
     st.plotly_chart(price_per_sqft_distribution())
+    st.info("Price per Sqft helps compare properties of different sizes. Extreme outliers are removed for clarity.")
 
 with gen2:
     st.plotly_chart(area_type_ratio())
@@ -93,6 +94,10 @@ st.header("Correlation Heatmap")
 st.divider()
 
 st.plotly_chart(heatmap())
+st.info("""
+A correlation heatmap reveals relationships between features.
+High correlation with price indicates strong predictive power.
+""")
 
 st.header("Location-Wise Statistical Table")
 st.divider()
