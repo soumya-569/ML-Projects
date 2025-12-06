@@ -104,7 +104,7 @@ def price_comparison_chart(pred_price,locality,func):
     ))
 
     fig.update_layout(
-        title = {"text":f"Price Comparison for {locality}","xanchor":"center","yanchor":"top"}
+        title = {"text":f"Price Comparison for {locality}","xanchor":"center","yanchor":"top"},
         yaxis_title="Price (₹ Lakhs)",
         x_axis = dict(showgrid=False),
         y_axis = dict(showgrid=False),
