@@ -7,10 +7,10 @@ import time
 from chart_clean import location_wise_average,price_comparison_chart
 
 # ** Import Robot Animation
-bot_path = "Streamlit_Apps/Bangalore_Housing_Price_App/Anima Bot.json"
+bot_path = "Streamlit_Apps/Bangalore_Housing_Price_App/Blue House.json"
 
-with open(bot_path,'r',encoding="utf-8") as load_robot:
-    robot = json.load(load_robot)
+with open(bot_path,'r',encoding="utf-8") as load_house:
+    house = json.load(load_house)
 
 # ** Import CSS Styling
 css_path = "Streamlit_Apps/Bangalore_Housing_Price_App/CSS/model.css"
@@ -37,7 +37,7 @@ for key in loc_enc.keys():
 # ** Building App
 
 st_lottie(
-    robot,
+    house,
     speed=1,
     reverse=False,
     loop=True,
