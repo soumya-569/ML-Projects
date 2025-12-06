@@ -98,13 +98,13 @@ Data Source: [Kaggle - Bangalore House Prices](https://www.kaggle.com/datasets/a
 col_btn_1,col_btn_2,col_btn_3 = st.columns(3,gap="small")
 
 with col_btn_1:
-    st.html("<a class='nav_cont' href='http://localhost:8501/analysis'><i class='fa fa-bar-chart'></i> See Analysis</a>")
+    st.html("<a class='nav_cont' href='https://get-house-price-in-bangalore.streamlit.app/analysis'><i class='fa fa-bar-chart'></i> See Analysis</a>")
 
 with col_btn_2:
-    st.html("<a class='nav_cont' href='http://localhost:8501/model'><i class='fas fa-robot'></i>  See Prediction</a>")
+    st.html("<a class='nav_cont' href='https://get-house-price-in-bangalore.streamlit.app/model'><i class='fas fa-robot'></i>  See Prediction</a>")
 
 with col_btn_3:
-    st.html("<a class='nav_cont' href='http://localhost:8501/conclusion'><i class='fas fa-gavel'></i> See Conclusion</a>")
+    st.html("<a class='nav_cont' href='https://get-house-price-in-bangalore.streamlit.app/conclusion'><i class='fas fa-gavel'></i> See Conclusion</a>")
 
 
 
