@@ -94,14 +94,14 @@ def price_comparison_chart(pred_price,locality,func):
 
     fig.add_trace(go.Bar(
         x= ["Predicted Price"],
-        y=[pred_price]
+        y=[pred_price],
         marker_color = "#00b4d8",
         name = "Predicted Price"
     ))
 
     fig.add_trace(go.Bar(
         x=["Average Price in "+locality],
-        y=[func(locality)]
+        y=[func],
         marker_color="#52b788",
         name="Locality Avg Price"
     ))
