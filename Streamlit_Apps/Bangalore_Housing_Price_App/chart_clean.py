@@ -82,7 +82,7 @@ df7 = df6.drop(columns=["location","price_per_sqft"])
 ## Create Location Wise Average Price
 def location_wise_average(user_loc):
     loc_price_df = df.groupby("location")[["price"]].mean()
-    return loc_price_df.loc[loc_price_df.index == user_loc].iloc[-1,:][0]
+    return loc_price_df.loc[loc_price_df.index == user_loc].iloc[-1,:][0]*100000
 
 ## Prediction Vs Average Price With Location
 
