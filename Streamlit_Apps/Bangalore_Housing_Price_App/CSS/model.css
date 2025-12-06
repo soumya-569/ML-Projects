@@ -71,7 +71,3 @@ div[data-testid='stFormSubmitButton']:hover{
 div[data-testid = 'stAlertContentInfo']{
     margin-left: 50px;
 }
-
-iframe[data-testid='stCustomComponentV1']{
-   margin-left: 145px; 
-}

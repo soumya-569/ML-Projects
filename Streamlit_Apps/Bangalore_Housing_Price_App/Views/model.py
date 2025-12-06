@@ -36,16 +36,17 @@ for key in loc_enc.keys():
 
 # ** Building App
 
-st_lottie(
-    house,
-    speed=1,
-    reverse=False,
-    loop=True,
-    quality="low",
-    height=250,
-    width=250,
-    key=None
-)
+with st.container():
+    st_lottie(
+        house,
+        speed=1,
+        reverse=False,
+        loop=True,
+        quality="low",
+        height=250,
+        width=250,
+        key=None
+    )
 
 with st.form(key="ml_form"):
     Area_Type = st.selectbox("Area Type",["Super built-up  Area","Built-up  Area","Plot  Area","Carpet  Area"])
