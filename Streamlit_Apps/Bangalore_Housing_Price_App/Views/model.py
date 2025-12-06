@@ -4,19 +4,19 @@ import pickle
 import json
 
 # ** Import CSS Styling
-css_path = r"F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\CSS\model.css"
+css_path = "Streamlit_Apps/Bangalore_Housing_Price_App/CSS/model.css"
 
 with open(css_path) as load_css:
     st.markdown(f"<style>{load_css.read()}</style>",unsafe_allow_html=True)
 
 # ** Import ML Model
-model_path = r"F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\Model\bglr_model.pkl"
+model_path = "Streamlit_Apps/Bangalore_Housing_Price_App/Model/bglr_model.pkl"
 
 with open(model_path,'rb') as load_model:
     model = pickle.load(load_model)
 
 # ** Import Location Encoded Json File To Mapping With User Input
-location_path = r"F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\Model\location_encoding.json"
+location_path = "Streamlit_Apps/Bangalore_Housing_Price_App/Model/location_encoding.json"
 
 with open(location_path,'r') as load_loc:
     loc_enc = json.load(load_loc)

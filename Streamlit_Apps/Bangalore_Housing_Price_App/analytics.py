@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 
-file_path = r'F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\Data\Bengaluru_House_Data.csv'
+file_path = 'Streamlit_Apps/Bangalore_Housing_Price_App/Data/Bengaluru_House_Data.csv'
 
 df = pd.read_csv(file_path)
 

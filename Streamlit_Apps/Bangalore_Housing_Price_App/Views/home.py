@@ -10,7 +10,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-css_path = r"F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\CSS\home.css"
+css_path = "Streamlit_Apps/Bangalore_Housing_Price_App/CSS/home.css"
 with open(css_path) as load_css:
     st.markdown(f"<style>{load_css.read()}</style>",unsafe_allow_html=True)
     
@@ -18,14 +18,14 @@ with open(css_path) as load_css:
 
 # @st.cache_data()  # ? Cache for 1 hour
 def data_preview():
-    file_path = r'F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\Data\Bengaluru_House_Data.csv'
+    file_path = 'Streamlit_Apps/Bangalore_Housing_Price_App/Data/Bengaluru_House_Data.csv'
 
     df = pd.read_csv(file_path)
     return st.dataframe(df.head(10))
 
 # ** Import welcome animation
 
-animation_path = r'F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\Anima Bot.json'
+animation_path = 'Streamlit_Apps/Bangalore_Housing_Price_App/Anima Bot.json'
 
 with open(animation_path,'r',encoding='utf-8') as anime:
     robot = json.load(anime)
