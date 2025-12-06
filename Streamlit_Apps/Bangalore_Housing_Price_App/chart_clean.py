@@ -109,7 +109,7 @@ def price_comparison_chart(pred_price,locality,func):
         x_axis = dict(showgrid=False),
         y_axis = dict(showgrid=False),
         plot_bgcolor = 'rgba(0,0,0,0)',
-        paper_bgcolor = 'rgba(0,0,0,0)'
+        paper_bgcolor = 'rgba(0,0,0,0)',
         height=450,
         showlegend=False
     )
