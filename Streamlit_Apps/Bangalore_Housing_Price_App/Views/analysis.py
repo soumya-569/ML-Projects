@@ -1,6 +1,6 @@
 import streamlit as st
-from analytics import location,location_chart,average_price,avg_price_sqft,total_properties,location_summary
-from charts import most_properties,area_type_ratio,price_distribution,price_per_sqft_distribution,bhk_distribution,avg_price_bhk,pps_bhk,sqft_vs_price,bhk_sqft,ten_exp_loc,ten_least_loc,heatmap,metric_selection
+from analytics import location,average_price,avg_price_sqft,total_properties,location_summary
+from chart_clean import most_properties,area_type_ratio,price_distribution,price_per_sqft_distribution,bhk_distribution,avg_price_bhk,pps_bhk,sqft_vs_price,bhk_sqft,ten_exp_loc,ten_least_loc,heatmap,metric_selection
 
 st.set_page_config(layout="wide")
 
