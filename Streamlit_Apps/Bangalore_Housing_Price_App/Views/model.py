@@ -41,7 +41,7 @@ with st.form(key="ml_form"):
 
     if submit:
         with st.spinner("Hang on! Predicting Price..."):
-            time.sleep(6)
+            time.sleep(4)
             loc_value = loc_enc[Location]
             feature_cols = ["area_type","location_te","Segement","bhk","total_sqft","bath","balcony"]
             new_data_point = pd.DataFrame([[Area_Type,loc_value,Segment,bhk,sqft,bath_count,balcony_count]],columns=feature_cols)
