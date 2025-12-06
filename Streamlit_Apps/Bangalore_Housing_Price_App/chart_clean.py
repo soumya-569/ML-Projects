@@ -2,11 +2,8 @@
 
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
-import plotly.figure_factory as ff
 import re
 
 df = pd.read_csv("Streamlit_Apps/Bangalore_Housing_Price_App/Data/Bengaluru_House_Data.csv")
