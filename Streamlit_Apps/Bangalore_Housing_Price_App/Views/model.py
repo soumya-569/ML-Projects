@@ -45,7 +45,7 @@ with st.form(key="ml_form"):
             loc_value = loc_enc[Location]
             feature_cols = ["area_type","location_te","Segement","bhk","total_sqft","bath","balcony"]
             new_data_point = pd.DataFrame([[Area_Type,loc_value,Segment,bhk,sqft,bath_count,balcony_count]],columns=feature_cols)
-            price_predict = model.predict(new_data_point)*100000
+            price_predict = model.predict(new_data_point)[0]*100000
             price_per_sqft = price_predict/sqft
             st.success(f"Based On Your Choice, House Price Will Be : ₹{price_predict:,.0f}")
             st.info(f"Price Per Square Feet Will Be : ₹{price_per_sqft:,.2f}")
