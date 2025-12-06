@@ -39,12 +39,12 @@ with st.form(key="ml_form"):
     submit = st.form_submit_button("Predict Price")
 
     if submit:
-        loc_value = loc_enc[Location]
-        feature_cols = ["area_type","location_te","Segement","bhk","total_sqft","bath","balcony"]
-        new_data_point = pd.DataFrame([[Area_Type,loc_value,Segment,bhk,sqft,bath_count,balcony_count]],columns=feature_cols)
-        price_predict = model.predict(new_data_point)[0]
         with st.spinner("Hang on! Predicting Price..."):
             time.sleep(8)
+            loc_value = loc_enc[Location]
+            feature_cols = ["area_type","location_te","Segement","bhk","total_sqft","bath","balcony"]
+            new_data_point = pd.DataFrame([[Area_Type,loc_value,Segment,bhk,sqft,bath_count,balcony_count]],columns=feature_cols)
+            price_predict = model.predict(new_data_point)[0]
             st.success(f"Based On Your Choice, House Price Will Be : ₹{price_predict*100000:,.0f}")
     else:
         st.info("Fill Out The Form To Get Your House Price")
