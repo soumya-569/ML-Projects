@@ -49,6 +49,6 @@ with st.form(key="ml_form"):
             price_per_sqft = round(price_predict/sqft,2)
             st.success(f"Based On Your Choice, House Price Will Be : ₹{price_predict*100000:,.0f}")
             st.info(f"Price Per Square Feet Will Be : {price_per_sqft}")
-            st.plotly_chart(price_comparison_chart(price_predict,Location,location_wise_average(Location)))
+            st.plotly_chart(price_comparison_chart(price_predict,Location,location_wise_average(Location)),use_container_width=True)
     else:
         st.info("Fill Out The Form To Get Your House Price")
