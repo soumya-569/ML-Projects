@@ -46,9 +46,9 @@ with st.form(key="ml_form"):
             feature_cols = ["area_type","location_te","Segement","bhk","total_sqft","bath","balcony"]
             new_data_point = pd.DataFrame([[Area_Type,loc_value,Segment,bhk,sqft,bath_count,balcony_count]],columns=feature_cols)
             price_predict = model.predict(new_data_point)*100000
-            price_per_sqft = round(price_predict/sqft,2)
+            price_per_sqft = price_predict/sqft
             st.success(f"Based On Your Choice, House Price Will Be : ₹{price_predict:,.0f}")
-            st.info(f"Price Per Square Feet Will Be : ₹{price_per_sqft}")
+            st.info(f"Price Per Square Feet Will Be : ₹{price_per_sqft:,.2f}")
             st.plotly_chart(price_comparison_chart(price_predict,Location,location_wise_average(Location)),use_container_width=True)
     else:
         st.info("Fill Out The Form To Get Your House Price")
