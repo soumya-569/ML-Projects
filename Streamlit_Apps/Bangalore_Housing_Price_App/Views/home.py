@@ -25,10 +25,10 @@ def data_preview():
 
 # ** Import welcome animation
 
-animation_path = 'Streamlit_Apps/Bangalore_Housing_Price_App/Blue House.json'
+animation_path = 'Streamlit_Apps/Bangalore_Housing_Price_App/hello.json'
 
 with open(animation_path,'r',encoding='utf-8') as anime:
-    home = json.load(anime)
+    robot = json.load(anime)
 
 # ** 2 Columns for welcome screen (Left > Animation, Right > Info)
 
@@ -36,7 +36,7 @@ col1,col2 = st.columns(2,gap="small")
 
 with col1:
     st_lottie(
-        home,
+        robot,
         speed= 1,
         reverse= False,
         loop= True, 
