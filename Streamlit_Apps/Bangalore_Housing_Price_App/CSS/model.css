@@ -76,6 +76,6 @@ div[data-testid='stElementContainer']{
     margin-left: 145px;
 }
 
-div[data-testid='stForm'] > div[data-testid='stElementContainer']{
+div[data-testid='stForm'] div[data-testid='stElementContainer']{
     margin-left: 0px;
 }
