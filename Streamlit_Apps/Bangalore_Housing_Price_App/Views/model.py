@@ -1,9 +1,16 @@
 import streamlit as st
+from streamlit_lottie import st_lottie
 import pandas as pd
 import pickle
 import json
 import time
 from chart_clean import location_wise_average,price_comparison_chart
+
+# ** Import Robot Animation
+bot_path = "Streamlit_Apps/Bangalore_Housing_Price_App/Anima Bot.json"
+
+with open(bot_path,'r',encoding="utf-8") as load_robot:
+    robot = json.load(load_robot)
 
 # ** Import CSS Styling
 css_path = "Streamlit_Apps/Bangalore_Housing_Price_App/CSS/model.css"
@@ -28,6 +35,17 @@ for key in loc_enc.keys():
     loc_list.append(key)
 
 # ** Building App
+
+st_lottie(
+    robot,
+    speed=1,
+    reverse=False,
+    loop=True,
+    quality="low",
+    height=250,
+    width=250,
+    key=None
+)
 
 with st.form(key="ml_form"):
     Area_Type = st.selectbox("Area Type",["Super built-up  Area","Built-up  Area","Plot  Area","Carpet  Area"])
