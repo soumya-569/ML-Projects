@@ -234,7 +234,7 @@ def bhk_sqft():
 
 def ten_exp_loc():
     most_expensive_location = df6.groupby("location",observed=False)[["price_per_sqft"]].mean().reset_index().rename(columns={"price_per_sqft":"Average Price Per SQFT"}).sort_values("Average Price Per SQFT",ascending=False).reset_index().iloc[0:10].drop(columns="index")
-    fig = px.bar(most_expensive_location,x="location",y="Average Price Per SQFT",color_discrete_sequence=['#00FFFF'],text=f"{"Average Price Per SQFT":2f}")
+    fig = px.bar(most_expensive_location,x="location",y="Average Price Per SQFT",color_discrete_sequence=['#00FFFF'])
     fig.update_layout(
         xaxis=dict(showgrid=False,title='Location',tickangle=-45),
         yaxis=dict(showgrid=False,title='Average Price Per SQFT'),
@@ -250,7 +250,7 @@ def ten_exp_loc():
 
 def ten_least_loc():
     most_cheapest_location = df6.groupby("location",observed=False)[["price_per_sqft"]].mean().reset_index().rename(columns={"price_per_sqft":"Average Price Per SQFT"}).sort_values("Average Price Per SQFT",ascending=True).reset_index().iloc[0:10].drop(columns="index")
-    fig = px.bar(most_cheapest_location,x="location",y="Average Price Per SQFT",color_discrete_sequence=['#00FFFF'],text=f"{"Average Price Per SQFT":2f}")
+    fig = px.bar(most_cheapest_location,x="location",y="Average Price Per SQFT",color_discrete_sequence=['#00FFFF'])
     fig.update_layout(
         xaxis=dict(showgrid=False,title='Location',tickangle=-45),
         yaxis=dict(showgrid=False,title='Average Price Per SQFT'),
