@@ -1,0 +1,51 @@
+:root{
+    --primary_bg:#0E1117;
+    --seonday_bg:#161B22;
+    --accent:#00FFFF;
+    --accent_hover:#00B4D8;
+    --second_accent:#FF6B6B;
+    --text_pri:#E6EDF3;
+    --text_second:#8B949E;
+    
+}
+
+.stApp {
+    background-color: var(--primary_bg);
+    color: var(--text_pri);
+}
+
+section[data-testid='stSidebar']{
+    border: 1px solid var(--accent);
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+img[data-testid='stHeaderLogo']{
+    height: 70px;
+    width: 70px;
+    margin-top: 60px;
+}
+
+img[data-testid='stSidebarLogo']{
+    height: 70px;
+    width: 70px;
+    margin-top: 20px;
+}
+
+div[data-testid='stSidebarNavLinkContainer']{
+    padding-top: 20px;
+}
+
+a[data-testid='stSidebarNavLink']{
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 5px 15px;
+}
+
+a[data-testid='stSidebarNavLink']:hover{
+    background-color: var(--accent_hover);
+}
+
+span[data-testid='stIconMaterial']{
+    color: var(--accent);
+}
