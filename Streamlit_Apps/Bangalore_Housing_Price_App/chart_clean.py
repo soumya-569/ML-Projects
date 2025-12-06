@@ -104,9 +104,12 @@ def price_comparison_chart(pred_price,locality,func):
     ))
 
     fig.update_layout(
-        title=f"Price Comparison for {locality}",
+        title = {"text":f"Price Comparison for {locality}","xanchor":"center","yanchor":"top"}
         yaxis_title="Price (₹ Lakhs)",
-        template="plotly_dark",
+        x_axis = dict(showgrid=False),
+        y_axis = dict(showgrid=False),
+        plot_bgcolor = 'rgba(0,0,0,0)',
+        paper_bgcolor = 'rgba(0,0,0,0)'
         height=450,
         showlegend=False
     )
