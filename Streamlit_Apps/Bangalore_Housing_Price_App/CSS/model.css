@@ -79,4 +79,5 @@ div[data-testid='stElementContainer']{
 
 div[data-testid='stForm'] div[data-testid='stElementContainer']{
     margin-left: 0px;
+    padding-left: 0px;
 }
