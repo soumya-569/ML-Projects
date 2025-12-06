@@ -74,6 +74,7 @@ div[data-testid = 'stAlertContentInfo']{
 
 div[data-testid='stElementContainer']{
     margin-left: 180px;
+    padding-left: 50px;
 }
 
 div[data-testid='stForm'] div[data-testid='stElementContainer']{
