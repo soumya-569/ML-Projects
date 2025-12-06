@@ -4,7 +4,7 @@ from charts import most_properties,area_type_ratio,price_distribution,price_per_
 
 st.set_page_config(layout="wide")
 
-css_path = r"F:\Udemy\Git\ML Portfolio\Streamlit Apps\Bangalore Housing Price App\CSS\analysis.css"
+css_path = r"F:\Udemy\Git\ML Portfolio\Streamlit_Apps\Bangalore_Housing_Price_App\CSS\analysis.css"
 
 with open(css_path) as load_css:
     st.markdown(f"<style>{load_css.read()}</style>",unsafe_allow_html=True)
