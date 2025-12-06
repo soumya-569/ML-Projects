@@ -69,7 +69,7 @@ div[data-testid='stFormSubmitButton']:hover{
 }
 
 div[data-testid = 'stAlertContentInfo']{
-    margin-left: 50px;
+    margin-left: 45px;
 }
 
 div[data-testid='stElementContainer']{
