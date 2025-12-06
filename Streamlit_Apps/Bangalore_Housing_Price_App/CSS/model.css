@@ -50,14 +50,6 @@ span[data-testid='stIconMaterial']{
     color: var(--accent);
 }
 
-div[data-testid='stMetric']{
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    padding-left: 10px;
-    padding-top: 10px;
-    background-color: var(--seonday_bg);
-}
-
 div[data-testid='stForm']{
     margin-left: 125px;
     width: 450px;
@@ -80,6 +72,6 @@ div[data-testid = 'stAlertContentInfo']{
     margin-left: 50px;
 }
 
-svg{
+iframe[data-testid='stCustomComponentV1']{
    margin-left: 145px; 
 }
