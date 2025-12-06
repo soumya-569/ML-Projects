@@ -41,8 +41,8 @@ with col1:
         reverse= False,
         loop= True, 
         quality= "low",
-        height= 400,
-        width= 400,
+        height= 450,
+        width= 450,
         key= None
     )
 
