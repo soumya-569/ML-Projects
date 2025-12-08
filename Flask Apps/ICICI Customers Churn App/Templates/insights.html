@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block head_extra %}
+{% endblock %}
+
+{% block content %}
+    <div class="heading">
+        <h2>Top Churn Segments</h2>
+    </div>
+    <div class="insights1">
+        <div class="card1">
+            <h3>Customers most likely to churn</h3>
+            <ul style="list-style-type: none;" class="details">
+                <li>Name :</li>
+                <li>Age :</li>
+                <li>Geography :</li>
+                <li>Balance :</li>
+            </ul>
+        </div>
+        <div class="card2">
+            <h3>Geography vs Churn Heatmap :</h3>
+        </div>
+    </div>
+    <div class="insights2">
+        <div class="card1">
+            <h3>SHAP Bar Chart – Feature Importance</h3>
+        </div>
+        <div class="card2">
+            <h3>Balance vs Churn Boxplot :</h3>
+        </div>
+    </div>
+    <div class="insights3">
+        <div class="card1">
+            <h3>Product Usage vs Churn Analysis</h3>
+        </div>
+        <div class="card2">
+            <h3>Customer Segmentation</h3>
+        </div>
+    </div>
+    <div class="insights3">
+        <div class="card1">
+            <h3>Credit Score Bucket Analysis</h3>
+        </div>
+        <div class="card2">
+            <h3>Retention Strategy Insights</h3>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block head_extra %}
+{% endblock %}
+
+{% block content %}
+    <div class="heading">
+        <h2>Customer Lookup</h2>
+    </div>
+    <div class="form_container">
+        <form method="post">
+            <label>Customer ID</label>
+            <input type="text" name="customer" class="input_field" placeholder="Enter Customer ID">
+            <input type="submit" value="Search" class="btn">
+        </form>
+    </div>
+    <div class="profile_risk_card1">
+        <div class="card1">
+            <ul style="list-style-type: none;" class="details">
+                <li>Name :</li>
+                <li>Age :</li>
+                <li>Geography :</li>
+                <li>Balance :</li>
+                <li>Products :</li>
+                <li>Active Member :</li>
+            </ul>
+        </div>
+        <div class="card2">
+            <h3>Churn Probability :</h3>
+        </div>
+    </div>
+    <div class="profile_risk_card2">
+        <div class="card1">
+            <ul style="list-style-type: none;" class="details">
+                <li>Name :</li>
+                <li>Age :</li>
+                <li>Geography :</li>
+                <li>Balance :</li>
+                <li>Products :</li>
+                <li>Active Member :</li>
+            </ul>
+        </div>
+        <div class="card2">
+            <h3>Churn Probability :</h3>
+        </div>
+    </div>
+{% endblock %}

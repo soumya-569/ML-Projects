@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block head_extra %}
+{% endblock %}
+
+{% block content %}
+    <div class="heading">
+        <h2>Batch Prediction</h2>
+    </div>
+    <div class="form_container">
+        <form method="post">
+            <label>Upload CSV to Predict Churn :</label>
+            <input type="file" id="myfile" hidden>
+            <label for="myfile" class="custom_file_label">Choose File</label>
+            <input type="submit" value="Upload File" class="btn">
+        </form>
+    </div>
+    <div class="cards">
+        <div class="card">
+            <ul class="details" style="list-style-type: none;">
+                <li>Total Customers Processed :</li>
+                <li>High Risk :</li>
+                <li>Medium Risk :</li>
+                <li>Low Risk :</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Chart Area</h3>
+        </div>
+    </div>
+    <div class="expander">
+        <details class="data_preview">
+            <summary>Table Preview – High Risk rows highlighted</summary>
+        </details>
+    </div>
+    <a class="csv_download" href="" download="Process_Data.csv">Download Results as CSV</a>
+{% endblock %}
