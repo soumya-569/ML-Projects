@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block head_extra %}
+    <link rel="stylesheet" href="{{url_for('static',filename='customer_lookup.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -7,11 +8,18 @@
         <h2>Customer Lookup</h2>
     </div>
     <div class="form_container">
-        <form method="post">
+        <form method="post" action="/customer_lookup">
             <label>Customer ID</label>
             <input type="text" name="customer" class="input_field" placeholder="Enter Customer ID">
             <input type="submit" value="Search" class="btn">
         </form>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category,msg in messages %}
+                <p class="{{category}}">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
     </div>
     <div class="profile_risk_card1">
         <div class="card1">

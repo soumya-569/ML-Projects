@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block head_extra %}
+    <link rel="stylesheet" href="{{url_for('static',filename='batch_prediction.css')}}">
 {% endblock %}
 
 {% block content %}
@@ -7,12 +8,19 @@
         <h2>Batch Prediction</h2>
     </div>
     <div class="form_container">
-        <form method="post">
+        <form method="post" action="/batch_prediction" enctype="multipart/form-data">
             <label>Upload CSV to Predict Churn :</label>
-            <input type="file" id="myfile" hidden>
+            <input type="file" id="myfile" name="file" hidden>
             <label for="myfile" class="custom_file_label">Choose File</label>
             <input type="submit" value="Upload File" class="btn">
         </form>
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category,msg in messages %}
+                <p class="{{category}}">{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
     </div>
     <div class="cards">
         <div class="card">

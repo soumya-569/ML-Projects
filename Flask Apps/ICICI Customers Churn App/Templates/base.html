@@ -2,8 +2,8 @@
 <html lang="eng">
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="../static/base.css">
-        {% block head_extra %}{% end block %}
+        <link rel="stylesheet" href="{{url_for('static',filename='base.css')}}">
+        {% block head_extra %}{% endblock %}
     </head>
     <body>
         <div class="main_container">
@@ -14,10 +14,10 @@
             <div class="bottom_container">
                 <div class="sidebar">
                     <div class="page_nav">
-                        <a href="https://www.w3schools.com/tags/tag_a.asp">Overview</a>
-                        <a href="https://www.w3schools.com/tags/tag_a.asp">Customer Lookup</a>
-                        <a href="https://www.w3schools.com/tags/tag_a.asp">Batch Prediction</a>
-                        <a href="https://www.w3schools.com/tags/tag_a.asp">Insights</a>
+                        <a href="/">Overview</a>
+                        <a href="/customer_lookup">Customer Lookup</a>
+                        <a href="/batch_prediction">Batch Prediction</a>
+                        <a href="/insights">Insights</a>
                     </div>
                 </div>
                 <div class="dashboard">
