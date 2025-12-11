@@ -81,15 +81,12 @@ body{
 
 .heading h2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-bottom: 1px solid var(--dark_grey);
-    margin-left: 350px;
-    margin-right: 350px;
-    padding-left: 60px;
+    margin-left: 480px;
 }
 
 .form_container{
-    margin-top: 35px;
-    margin-left: 260px;
+    margin-top: 50px;
+    margin-left: 330px;
 }
 
 label{
@@ -169,8 +166,8 @@ label{
     border-radius: 8px;
     padding-top: 15px;
     padding-bottom: 15px;
-    margin-left: 80px;
-    margin-right: 80px;
+    margin-left: 135px;
+    margin-right: 135px;
     cursor: pointer;
     margin-bottom: 40px;
 }
@@ -194,7 +191,7 @@ summary::marker{
     font-weight: normal;
     border: 2px solid var(--deep_maroon);
     border-radius: 6px;
-    margin-left: 420px;
+    margin-left: 500px;
 }
 
 .csv_download:hover{

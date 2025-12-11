@@ -37,7 +37,7 @@ body{
 
 .sidebar{
     background-color: #1B2631;
-    height: 100vh;
+    /* height: 100vh; */
     width: 220px;
 }
 
@@ -81,16 +81,14 @@ body{
 
 .heading h2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-bottom: 1px solid var(--dark_grey);
-    margin-left: 350px;
-    margin-right: 350px;
+    margin-left: 420px;
 }
 
 .kpis{
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    margin-top: 40px;
+    justify-content: space-evenly;
+    margin-top: 50px;
 }
 
 .kpi{
@@ -110,7 +108,7 @@ body{
 .chart_c1{
     display: flex;
     flex-direction: row;
-    margin-top: 35px;
+    margin-top: 50px;
     justify-content: space-around;
 }
 
@@ -119,15 +117,21 @@ body{
     flex-direction: row;
     margin-top: 35px;
     justify-content: space-around;
+    margin-bottom: 40px;
 }
 
 .chart{
-    border: 1px solid var(--icici_orange);
+    border: 1px solid #D5D8DC;
+    border-left: 6px solid var(--icici_orange);
     border-radius: 8px;
+    background-color: white;
     width: 500px;
+    height: 300px;
 }
 
 .chart h3{
+    padding-top: 5px;
     padding-left: 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
 }

@@ -81,10 +81,7 @@ body{
 
 .heading h2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    border-bottom: 1px solid var(--dark_grey);
-    margin-left: 350px;
-    margin-right: 350px;
-    padding-left: 40px;
+    margin-left: 450px;
 }
 
 .insights1{
@@ -119,7 +116,7 @@ body{
 }
 
 .card1 h3{
-    padding-top: 10px;
+    padding-top: 5px;
     padding-left: 25px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: normal;
