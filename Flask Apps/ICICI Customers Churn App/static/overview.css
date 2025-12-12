@@ -94,15 +94,26 @@ body{
 .kpi{
     display: flex;
     flex-direction:column;
-    padding-left: 25px;
+    justify-content: space-between;
+    padding: 12px 0px;
+    padding-left: 20px;
     background-color: var(--icici_orange);
     border: none;
     border-radius: 8px;
     width: 215px;
+    height: 110px;
 }
 
-.kpi h3{
+.kpi_title{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+    font-size: 15px;
+}
+
+.kpi_value{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--light_grey_bg);
+    font-size: 25px;
 }
 
 .chart_c1{
@@ -126,7 +137,7 @@ body{
     border-radius: 8px;
     background-color: white;
     width: 500px;
-    height: 300px;
+    height: 330px;
 }
 
 .chart h3{
@@ -135,3 +146,4 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: normal;
 }
+

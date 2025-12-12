@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block head_extra %}
     <link rel="stylesheet" href="{{url_for('static',filename='customer_lookup.css')}}">
+    <script src="https://cdn.plot.ly/plotly-3.3.0.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -24,31 +25,40 @@
     <div class="profile_risk_card1">
         <div class="card1">
             <ul style="list-style-type: none;" class="details">
-                <li>Name :</li>
-                <li>Age :</li>
-                <li>Geography :</li>
-                <li>Balance :</li>
-                <li>Products :</li>
-                <li>Active Member :</li>
+                <li>Name :  {{profile[0]}}</li>
+                <li>Age :  {{profile[1]}}</li>
+                <li>Geography :  {{profile[2]}}</li>
+                <li>Balance :  {{profile[3]}}</li>
+                <li>Products :  {{profile[4]}}</li>
+                <li>Active Member :  {{profile[5]}}</li>
             </ul>
         </div>
         <div class="card2">
-            <h3>Churn Probability :</h3>
+            <h3>Churn Probability</h3>
+            <ul style="list-style-type: none;" class="details">
+                <li>Churn Probability :  {{profile[6]}}</li>
+                <li>Risk Category :  {{profile[7]}}</li>
+            </ul>
+            {{risk_chart | safe}}
         </div>
     </div>
     <div class="profile_risk_card2">
         <div class="card1">
+            <h3>Key Risk Factors</h3>
             <ul style="list-style-type: none;" class="details">
-                <li>Name :</li>
-                <li>Age :</li>
-                <li>Geography :</li>
-                <li>Balance :</li>
-                <li>Products :</li>
-                <li>Active Member :</li>
+                <li>1. {{shap_factors[0]}}</li>
+                <li>2. {{shap_factors[1]}}</li>
+                <li>3. {{shap_factors[2]}}</li>
+                <li>4. {{shap_factors[3]}}</li>
+                <li>5. {{shap_factors[4]}}</li>
             </ul>
         </div>
         <div class="card2">
-            <h3>Churn Probability :</h3>
+            <h3>Contact Priority Level</h3>
+            <ul style="list-style-type: none;" class="details">
+                <li>Contact Priority :  {{profile[8]}}</li>
+                <li>Recommended Contact :  {{profile[9]}}</li>
+            </ul>
         </div>
     </div>
 {% endblock %}

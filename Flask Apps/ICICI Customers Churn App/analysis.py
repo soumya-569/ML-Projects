@@ -8,19 +8,25 @@ import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
+from plotly.offline import plot
+from plotly.utils import PlotlyJSONEncoder
 from sklearn.metrics import *
 import json
 import pickle
+import os
 import re
+import shap
 
 # ** Ingest Data & Create Dataframe
 
-df = pd.read_csv("Flask Apps/ICICI Customers Churn App/Data/Bank_Churn.csv")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+csv_path = os.path.join(BASE_DIR, "Data", "Bank_Churn.csv")
+df = pd.read_csv(csv_path)
 
 # ** Ingest & Load The ML Model
 
-file_path = "Flask Apps/ICICI Customers Churn App/Model/bank_model.pkl"
-with open(file_path,'rb') as load_pipeline:
+ml_path = os.path.join(BASE_DIR,"Model","bank_model.pkl")
+with open(ml_path,'rb') as load_pipeline:
     pipeline = pickle.load(load_pipeline)
 
 # ** EDA
@@ -31,6 +37,7 @@ df["Gender"] = df["Gender"].str.strip()
 
 df1 = df.drop(columns=["CustomerId","Surname"])
 x = df1.drop("Exited",axis=1)
+y = df1["Exited"]
 
 # ** Feature Engineering
 ## Add Risk Category Feature
@@ -87,14 +94,50 @@ ct_conditions = [
 
 ct_choices = [
     "Not Required",
-    "24 Hrs",
-    "36 Hrs",
-    "48 Hrs",
-    "72 Hrs",
-    "1 Week"
+    "Within 24 Hrs",
+    "Within 36 Hrs",
+    "Within 48 Hrs",
+    "Within 72 Hrs",
+    "Within 1 Week"
 ]
 
 df["RecommendedContact"] = np.select(ct_conditions,ct_choices,default="None")
+
+## Age Bucket Feature
+
+age_conditions = [
+    df["Age"].between(18,35),
+    df["Age"].between(35,60),
+    df["Age"] > 60
+]
+
+age_choices=[
+    "18-35",
+    "35-60",
+    "Above 60"
+]
+
+df["AgeBucket"] = np.select(age_conditions,age_choices,default="None")
+
+## Tenure Bucket Feature
+
+tn_conditions = [
+    df["Tenure"].between(0,1),
+    df["Tenure"].between(1,3),
+    df["Tenure"].between(3,5),
+    df["Tenure"].between(5,8),
+    df["Tenure"].between(8,10)
+]
+
+tn_choices = [
+    "Less than 1 yr",
+    "1-3 yrs",
+    "3-5 yrs",
+    "5-8 yrs",
+    "8-10 yrs"
+]
+
+df["TenureBucket"] = np.select(tn_conditions,tn_choices,default="Above 10 yrs")
 
 # ** KPI's
 def total_customers():
@@ -102,13 +145,204 @@ def total_customers():
 
 def current_churn_rate():
     churn_rate = df["Exited"].value_counts(normalize=True)*100
-    return churn_rate[1]
+    return round(churn_rate[1],2)
 
 def high_risk_customers():
     high_risk = df["RiskCategory"].loc[df["RiskCategory"]=="High"].count()
-    print(high_risk)
+    return high_risk
 
 def avg_credit_score():
-    return df["CreditScore"].mean()
+    return round(df["CreditScore"].mean(),2)
+
+
+# ** Churn Distribution
+def churn_distribution():
+    colors = ["#2C3E50","#D35400"]
+    labels = df["Exited"].value_counts().index
+    values = df["Exited"].value_counts().values
+    fig = go.Figure(go.Pie(labels=labels,values=values))
+    fig.update_traces(marker=dict(colors=colors,line=dict(color='#000000',width=2)))
+    fig.update_layout(
+        height=250,
+        width=480,
+        plot_bgcolor = "rgba(0,0,0,0)",
+        paper_bgcolor = "rgba(0,0,0,0)",
+        margin=dict(t=10,b=20,l=10,r=10),
+        showlegend=False
+    )
+
+    plot_config = {
+        'displayModeBar': False
+    }
+
+    
+    chart_html = plot(fig,include_plotlyjs=False,output_type="div",config=plot_config)
+    return chart_html
+
+def age_vs_churn():
+    with_churn = df.loc[df["Exited"] == 1].groupby("AgeBucket")[["Exited"]].count().reset_index()
+    without_churn = df.loc[df["Exited"] == 0].groupby("AgeBucket")[["Exited"]].count().reset_index()
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        y=with_churn["AgeBucket"],
+        x=with_churn["Exited"],
+        name="Churned",
+        orientation="h",
+        marker=dict(color="#D35400",line=dict(color="#7B241C",width=3))
+    ))
+
+    fig.add_trace(go.Bar(
+        y=without_churn["AgeBucket"],
+        x=without_churn["Exited"],
+        name="Not Churned",
+        orientation="h",
+        marker=dict(color="#2C3E50",line=dict(color="#1B2631",width=3))
+    ))
+
+    fig.update_layout(
+        barmode="stack",
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        height = 250,
+        width = 480,
+        margin = dict(l=10,r=10,t=10,b=20)
+    )
+
+    age_churn_html = plot(fig,include_plotlyjs=False,output_type="div",config={'displayModeBar': False})
+
+    return age_churn_html
+
+def tenure_vs_churn():
+    with_churn = df.loc[df["Exited"] == 1].groupby("TenureBucket")[["Exited"]].count().reset_index()
+    without_churn = df.loc[df["Exited"] == 0].groupby("TenureBucket")[["Exited"]].count().reset_index()
+
+    fig = go.Figure()
+
+    fig.add_trace(go.Bar(
+        x=with_churn["Exited"],
+        y=with_churn["TenureBucket"],
+        orientation="h",
+        name="Churned",
+        marker=dict(color="#D35400",line=dict(color="#7B241C",width=3))
+    ))
+
+    fig.add_trace(go.Bar(
+        x=without_churn["Exited"],
+        y=without_churn["TenureBucket"],
+        orientation="h",
+        name="Not Churned",
+        marker=dict(color="#2C3E50",line=dict(color="#1B2631",width=3))
+    ))
+
+    fig.update_layout(
+        barmode = "stack",
+        height=250,
+        width=480,
+        margin=dict(l=10,r=10,t=10,b=20),
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)"
+    )
+
+    tenure_churn_html = plot(fig,include_plotlyjs=False,output_type="div",config={"displayModeBar":False})
+
+    return tenure_churn_html
+
+def churn_by_activity():
+    colors = ["#D35400","#2C3E50"]
+    with_churn = df.loc[df["Exited"]==1].groupby("IsActiveMember")[["Exited"]].count().reset_index()
+    fig = go.Figure(go.Pie(labels=with_churn["IsActiveMember"],values=with_churn["Exited"],hole=0.45))
+
+    fig.update_traces(marker=dict(colors=colors,line=dict(color="#000000",width=2)))
+
+    fig.update_layout(
+        height=250,
+        width=480,
+        margin=dict(l=10,r=10,t=10,b=20),
+        showlegend=False,
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)"
+    )
+
+    churn_activity_html = plot(fig,include_plotlyjs=False,output_type="div",config={"displayModeBar":False})
+
+    return churn_activity_html
+
+def profile(id):
+    id = int(id)
+    name = df["Surname"].loc[df["CustomerId"] == id][0]
+    age = df["Age"].loc[df["CustomerId"] == id][0]
+    geography = df["Geography"].loc[df["CustomerId"] == id][0]
+    balance  = df["Balance"].loc[df["CustomerId"] == id][0]
+    products  = df["NumOfProducts"].loc[df["CustomerId"] == id][0]
+    active_member  = df["IsActiveMember"].loc[df["CustomerId"] == id][0]
+    churn_probability  = round((df["ChurnProbability"].loc[df["CustomerId"] == id][0])*100,2)
+    risk  = df["RiskCategory"].loc[df["CustomerId"] == id][0]
+    contact  = df["ContactPriority"].loc[df["CustomerId"] == id][0]
+    timing  = df["RecommendedContact"].loc[df["CustomerId"] == id][0]
+
+    details = [name,age,geography,balance,products,active_member,churn_probability,risk,contact,timing]
+
+    return details
+
+def shap_factors(id):
+    id = int(id)
+    preprocessor = pipeline.named_steps["preprocessor"]
+    ml_model = pipeline.named_steps["classifier"]
+    preprocessor.n_jobs = 1
+
+    x_transformed = preprocessor.transform(x)
+    feature_names = preprocessor.get_feature_names_out()
+
+    explainer = shap.TreeExplainer(ml_model)
+    shap_values = explainer.shap_values(x_transformed)
+
+    idx = df.index[df["CustomerId"]==id][0]
+
+    customer_shap = shap_values[idx]
+    customer_data = x_transformed[idx]
+
+    exp = shap.Explanation(
+        values=customer_shap,
+        base_values=explainer.expected_value,
+        data=customer_data,
+        feature_names=feature_names
+    )
+
+    abs_vals = np.abs(exp.values)
+    top_idx = abs_vals.argsort()[::-1][:5]
+    top_factors_raw = [
+        f"{exp.feature_names[i]} : {exp.values[i]*100:.3f}"
+        for i in top_idx
+    ] 
+
+    top_factors = [factor.split("__")[-1] for factor in top_factors_raw]
+
+    return top_factors  
+
+def risk_gauge(id):
+    id = int(id)
+    churn_probability  = round((df["ChurnProbability"].loc[df["CustomerId"] == id][0])*100,2)
+    fig = go.Figure(go.Indicator(
+        mode="number+gauge",
+        value=churn_probability,
+        domain = {'x': [0, 1], 'y': [0, 1]},
+        gauge={'axis':{'range':[None,100]},'steps':[{'range':[0,50],'color':"lightgray"},{'range':[50,100],'color':"gray"}],'bar':{'color':"#D35400"}}
+    ))
+
+    fig.update_layout(
+        height=100,
+        width=240,
+        margin=dict(l=40,r=10,t=10,b=20),
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)"
+    )
+
+    risk_html = plot(fig,include_plotlyjs=False,output_type="div",config={"displayModeBar":False})
+
+    return risk_html
+
+
+
+
     
 
