@@ -1,26 +1,11 @@
-from flask import Flask,url_for,redirect,render_template,flash,request
-from analysis import total_customers,current_churn_rate,high_risk_customers,avg_credit_score,churn_distribution,age_vs_churn,tenure_vs_churn,churn_by_activity,profile,shap_factors,risk_gauge
+from flask import Flask,url_for,redirect,render_template,flash,request,send_file
+from analysis import total_customers,current_churn_rate,high_risk_customers,avg_credit_score,churn_distribution,age_vs_churn,tenure_vs_churn,churn_by_activity,profile,shap_factors,batch_process,download_df,credit_vs_churn,geography_vs_churn,products_vs_churn,balance_vs_churn
+import pandas as pd
 import os
 import time
 
 app = Flask(__name__)
 app.secret_key = "sunny2001"
-
-UPLOAD_FOLDER = "uploads/temp"
-os.makedirs(UPLOAD_FOLDER,exist_ok=True)
-
-DELETE_AFTER = 2*60*60   #? Delete after 2 hours
-
-def delete_old_file():
-    now = time.time()
-    for filename in os.listdir(UPLOAD_FOLDER):
-        file_path = os.path.join(UPLOAD_FOLDER,filename)
-
-        if os.path.isfile(file_path):
-            file_age = now - os.path.getmtime(file_path)
-
-            if file_age > DELETE_AFTER:
-                os.remove(file_path)
 
 @app.route("/")
 def overview():
@@ -40,7 +25,6 @@ def overview():
 def customer_lookup():
     profile_v=None
     shap_factors_v=None
-    risk_indicate=None
     
     if request.method == "POST":
         cs_id = request.form.get("customer")
@@ -48,14 +32,15 @@ def customer_lookup():
             flash(f"Showing Result For Customer ID :{cs_id}",category="success")
             profile_v = profile(cs_id)
             shap_factors_v = shap_factors(cs_id)
-            risk_indicate = risk_gauge(cs_id)
         else:
             flash("Enter A Customer ID To View Profile Insights",category="info")
-    return render_template("customer_lookup.html",profile=profile_v,shap_factors=shap_factors_v,risk_chart=risk_indicate)
+    return render_template("customer_lookup.html",profile=profile_v,shap_factors=shap_factors_v)
+
 
 @app.route("/batch_prediction",methods=["GET","POST"])
 def batch_prediction():
-    delete_old_file()
+    process = None
+    global upload_data
     if request.method == "POST":
         if "file" not in request.files:
             flash("File not found upload again",category="info")
@@ -67,12 +52,33 @@ def batch_prediction():
             flash("No file is selected",category="info")
             return redirect(url_for("batch_prediction"))
         
-        file_path = os.path.join(UPLOAD_FOLDER,file.filename)
-        file.save(file_path)
-        flash(f"File:{file.filename} uploaded successfully",category="success")
-    return render_template("batch_predict.html")
+        if file.filename.endswith(".csv"):
+            df = pd.read_csv(file)
+            process = batch_process(df)
+            upload_data = df
+        else:
+            flash("Only CSV File Is Supported",category="info")
+            return redirect(url_for("batch_prediction"))
+            
+        flash(f"File : {file.filename} uploaded successfully",category="success")
+    return render_template("batch_predict.html",process_bulk = process)
+
+@app.route("/download_csv")
+def download_csv():
+    return send_file(
+        download_df(upload_data),
+        as_attachment=True,
+        download_name="Process_Data.csv",
+        mimetype="text/csv"
+    )
 
 @app.route("/insights")
 def insights():
-    return render_template("insights.html")
+    return render_template(
+        "insights.html",
+        credit_vs_churn=credit_vs_churn(),
+        geography_vs_churn=geography_vs_churn(),
+        products_vs_churn=products_vs_churn(),
+        balance_vs_churn=balance_vs_churn()
+    )
 

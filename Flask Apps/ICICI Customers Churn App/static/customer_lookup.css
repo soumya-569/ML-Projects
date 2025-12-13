@@ -5,74 +5,6 @@
     --light_grey_bg:#F8F9F9;
     --white:#FFFFFF;
 }
-body{
-    margin: 0px 0px;
-}
-
-.main_container{
-    display: flex;
-    flex-direction: column;
-}
-
-.top_container{
-    display: flex;
-    flex-direction: row;
-    background-color: var(--light_grey_bg);
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 15px;
-    justify-content: space-between;
-    border-bottom: 1px solid #D5D8DC;
-}
-
-.top_container h1 {
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 25px;
-}
-
-.bottom_container{
-    display: flex;
-    flex-direction: row;
-}
-
-.sidebar{
-    background-color: #1B2631;
-    /* height: 100vh; */
-    width: 220px;
-}
-
-.page_nav{
-    display: flex;
-    flex-direction: column;
-    margin-top: 75px;
-    width: 100%;
-}
-
-.page_nav a{
-    text-decoration: none;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: #ECF0F1;
-    margin-bottom: 40px;
-    background-color: transparent;
-    padding-left: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
-
-.page_nav a:active{
-    border-left: 4px solid #D35400;
-    background-color: #273746;
-}
-
-.page_nav a:hover{
-    background-color: #273746;
-    cursor: pointer;
-}
-
-.dashboard{
-    background-color: #F4F6F7;
-    width: 100%;
-}
 
 .heading{
     margin-top: 35px;
@@ -81,12 +13,13 @@ body{
 
 .heading h2{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin-left: 450px;
+    margin-left: 530px;
 }
 
 .form_container{
     margin-top: 50px;
-    margin-left: 400px;
+    margin-left: 420px;
+    margin-bottom: 50px;
 }
 
 label{
@@ -94,6 +27,7 @@ label{
     font-size: 20px;
     font-weight: bold;
     padding-right: 10px;
+    padding-left: 60px;
 }
 
 .input_field{
@@ -117,6 +51,30 @@ label{
     border: 1px solid var(--deep_maroon);
     color: var(--deep_maroon);
     cursor: pointer;
+}
+
+.success{
+    margin-top: 25px;
+    margin-right: 420px;
+    color: var(--light_grey_bg);
+    padding: 10px 15px;
+    background-color: rgb(14, 71, 14);
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.info{
+    margin-top: 25px;
+    margin-right: 420px;
+    color: var(--light_grey_bg);
+    padding: 10px 10px;
+    background-color: rgb(88, 20, 20);
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
 }
 
 .profile_risk_card1{

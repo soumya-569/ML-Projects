@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block head_extra %}
     <link rel="stylesheet" href="{{url_for('static',filename='batch_prediction.css')}}">
+    <script src="https://cdn.plot.ly/plotly-3.3.0.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -25,20 +26,25 @@
     <div class="cards">
         <div class="card">
             <ul class="details" style="list-style-type: none;">
-                <li>Total Customers Processed :</li>
-                <li>High Risk :</li>
-                <li>Medium Risk :</li>
-                <li>Low Risk :</li>
+                <li>Total Customers Processed :  {{process_bulk[0]}}</li>
+                <li>High Risk :  {{process_bulk[1]}}</li>
+                <li>Medium Risk :  {{process_bulk[2]}}</li>
+                <li>Low Risk :  {{process_bulk[3]}}</li>
             </ul>
         </div>
         <div class="card">
-            <h3>Chart Area</h3>
+            <h3>Risk Distribution</h3>
+            {{process_bulk[4] | safe}}
         </div>
     </div>
     <div class="expander">
         <details class="data_preview">
             <summary>Table Preview – High Risk rows highlighted</summary>
+            <div class="table_scroll">
+                {{process_bulk[5] | safe}}
+            </div>
         </details>
     </div>
-    <a class="csv_download" href="" download="Process_Data.csv">Download Results as CSV</a>
+    <a class="csv_download" href="{{url_for('download_csv')}}">Download Results as CSV</a>
+    <div class="end"></div>
 {% endblock %}

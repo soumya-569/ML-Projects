@@ -14,11 +14,23 @@
             <div class="bottom_container">
                 <div class="sidebar">
                     <div class="page_nav">
-                        <a href="/">Overview</a>
-                        <a href="/customer_lookup">Customer Lookup</a>
-                        <a href="/batch_prediction">Batch Prediction</a>
-                        <a href="/insights">Insights</a>
+                        <a href="/" class="{{ 'active' if request.path == '/' else '' }}">
+                            Overview
+                        </a>
+
+                        <a href="/customer_lookup" class="{{ 'active' if request.path == '/customer_lookup' else '' }}">
+                            Customer Lookup
+                        </a>
+
+                        <a href="/batch_prediction" class="{{ 'active' if request.path == '/batch_prediction' else '' }}">
+                            Batch Prediction
+                        </a>
+
+                        <a href="/insights" class="{{ 'active' if request.path == '/insights' else '' }}">
+                            Insights
+                        </a>
                     </div>
+
                 </div>
                 <div class="dashboard">
                     {% block content %}
