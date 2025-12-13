@@ -21,12 +21,12 @@ os.environ["MKL_NUM_THREADS"] = "1"
 # ** Ingest Data & Create Dataframe
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(BASE_DIR, "Data", "Bank_Churn.csv")
+csv_path = os.path.join(BASE_DIR, "data", "bank_churn.csv")
 df = pd.read_csv(csv_path)
 
 # ** Ingest & Load The ML Model
 
-ml_path = os.path.join(BASE_DIR,"Model","bank_model.pkl")
+ml_path = os.path.join(BASE_DIR,"model","bank_model.pkl")
 with open(ml_path,'rb') as load_pipeline:
     pipeline = pickle.load(load_pipeline)
 
