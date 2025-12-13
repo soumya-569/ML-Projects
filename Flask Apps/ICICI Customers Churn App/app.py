@@ -1,8 +1,6 @@
 from flask import Flask,url_for,redirect,render_template,flash,request,send_file
-from analysis import total_customers,current_churn_rate,high_risk_customers,avg_credit_score,churn_distribution,age_vs_churn,tenure_vs_churn,churn_by_activity,profile,shap_factors,batch_process,download_df,credit_vs_churn,geography_vs_churn,products_vs_churn,balance_vs_churn
+from analysis import total_customers,current_churn_rate,high_risk_customers,avg_credit_score,churn_distribution,age_vs_churn,tenure_vs_churn,churn_by_activity,profile,shap_factors,batch_process,download_df,credit_vs_churn,geography_vs_churn,products_vs_churn,balance_vs_churn,customer_list
 import pandas as pd
-import os
-import time
 
 app = Flask(__name__)
 app.secret_key = "sunny2001"
@@ -28,12 +26,12 @@ def customer_lookup():
     
     if request.method == "POST":
         cs_id = request.form.get("customer")
-        if cs_id:
+        if int(cs_id) in customer_list():
             flash(f"Showing Result For Customer ID :{cs_id}",category="success")
             profile_v = profile(cs_id)
             shap_factors_v = shap_factors(cs_id)
         else:
-            flash("Enter A Customer ID To View Profile Insights",category="info")
+            flash("Enter A Valid Customer ID To View Profile Insights",category="info")
     return render_template("customer_lookup.html",profile=profile_v,shap_factors=shap_factors_v)
 
 
@@ -81,4 +79,7 @@ def insights():
         products_vs_churn=products_vs_churn(),
         balance_vs_churn=balance_vs_churn()
     )
+
+if __name__ == "__main__":
+    app.run()
 

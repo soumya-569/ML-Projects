@@ -9,14 +9,14 @@ import plotly.express as px
 import plotly.graph_objects as go
 import plotly.figure_factory as ff
 from plotly.offline import plot
-from plotly.utils import PlotlyJSONEncoder
 from sklearn.metrics import *
-import json
 import pickle
 import os
-import re
 from io import BytesIO
 import shap
+
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
 
 # ** Ingest Data & Create Dataframe
 
@@ -350,12 +350,13 @@ def shap_factors(id):
     feature_names = preprocessor.get_feature_names_out()
 
     explainer = shap.TreeExplainer(ml_model)
-    shap_values = explainer.shap_values(x_transformed)
 
     idx = df.index[df["CustomerId"]==id][0]
 
-    customer_shap = shap_values[idx]
-    customer_data = x_transformed[idx]
+    customer_data = x_transformed[idx:idx+1]
+    shap_values = explainer.shap_values(customer_data)
+    customer_shap = shap_values[0]
+
 
     exp = shap.Explanation(
         values=customer_shap,
@@ -683,6 +684,9 @@ def products_vs_churn():
     products_churn_html = plot(fig,include_plotlyjs=False,output_type="div",config={"displayModeBar":False})
 
     return products_churn_html
+
+def customer_list():
+    return df["CustomerId"].tolist()
 
 
 
