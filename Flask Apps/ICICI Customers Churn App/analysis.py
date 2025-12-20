@@ -23,7 +23,6 @@ os.environ["MKL_NUM_THREADS"] = "1"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 csv_path = os.path.join(BASE_DIR, "data", "bank_churn.csv")
 df = pd.read_csv(csv_path)
-
 # ** Ingest & Load The ML Model
 
 ml_path = os.path.join(BASE_DIR,"model","bank_model.pkl")
@@ -385,13 +384,18 @@ def batch_process(df):
     df["Gender"] = df["Gender"].str.strip()
 
     df1 = df.drop(columns=["CustomerId","Surname"])
-    x = df1.drop("Exited",axis=1)
-    y = df1["Exited"]
+    df1_columns = df1.columns.tolist()
+    def is_exited():
+        if "Exited" in df1_columns:
+            x = df1.drop("Exited",axis=1)
+            return x
+        else:
+            return df1
 
     # ** Feature Engineering
     ## Add Risk Category Feature
 
-    probs = pipeline.predict_proba(x)[:,1]
+    probs = pipeline.predict_proba(is_exited())[:,1]
     df["ChurnProbability"] = probs
 
     conditions = [
@@ -457,13 +461,18 @@ def download_df(df):
     df["Gender"] = df["Gender"].str.strip()
 
     df1 = df.drop(columns=["CustomerId","Surname"])
-    x = df1.drop("Exited",axis=1)
-    y = df1["Exited"]
+    df1_columns = df1.columns.tolist()
+    def is_exited():
+        if "Exited" in df1_columns:
+            x = df1.drop("Exited",axis=1)
+            return x
+        else:
+            return df1
 
     # ** Feature Engineering
     ## Add Risk Category Feature
 
-    probs = pipeline.predict_proba(x)[:,1]
+    probs = pipeline.predict_proba(is_exited())[:,1]
     df["ChurnProbability"] = probs
 
     conditions = [
