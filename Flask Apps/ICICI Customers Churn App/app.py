@@ -26,10 +26,13 @@ def customer_lookup():
     
     if request.method == "POST":
         cs_id = request.form.get("customer")
-        if int(cs_id) in customer_list():
-            flash(f"Showing Result For Customer ID :{cs_id}",category="success")
-            profile_v = profile(cs_id)
-            shap_factors_v = shap_factors(cs_id)
+        if cs_id:
+            if int(cs_id) in customer_list():
+                flash(f"Showing Result For Customer ID :{cs_id}",category="success")
+                profile_v = profile(cs_id)
+                shap_factors_v = shap_factors(cs_id)
+            else:
+                flash(f"Enter A Valid Customer ID",category="info")
         else:
             flash("Enter A Valid Customer ID To View Profile Insights",category="info")
     return render_template("customer_lookup.html",profile=profile_v,shap_factors=shap_factors_v)
